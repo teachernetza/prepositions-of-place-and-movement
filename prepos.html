@@ -1,0 +1,1517 @@
+<!doctype html>
+<html lang="es" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prepositions Lab</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: rgba(30, 41, 59, 0.9);
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --accent-primary: #8b5cf6;
+      --accent-secondary: #a78bfa;
+      --accent-gold: #fbbf24;
+      --surface-elevated: #334155;
+      --border-subtle: rgba(139, 92, 246, 0.3);
+      --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.2);
+      --footer-bg: #020617;
+    }
+    
+    .light-mode {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-card: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent-primary: #7c3aed;
+      --accent-secondary: #a78bfa;
+      --accent-gold: #f59e0b;
+      --surface-elevated: #f1f5f9;
+      --border-subtle: rgba(124, 58, 237, 0.2);
+      --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.08);
+      --footer-bg: #f1f5f9;
+    }
+    
+    * {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .elegant-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      border-radius: 16px;
+    }
+    
+    .light-mode .elegant-card {
+      backdrop-filter: none;
+      border: 1px solid #e2e8f0;
+    }
+    
+    .accent-gradient {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    }
+    
+    .gold-accent {
+      color: var(--accent-gold);
+    }
+    
+    .elegant-btn {
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      color: white;
+      border: 2px solid transparent;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 12px;
+    }
+    
+    .elegant-btn:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+      border-color: var(--accent-gold);
+    }
+    
+    .light-mode .elegant-btn {
+      border: 2px solid var(--accent-primary);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .light-mode .elegant-btn:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--text-primary);
+    }
+    
+    .body-text {
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Simulator Styles */
+    .simulator-container {
+      background: var(--surface-elevated);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border-subtle);
+    }
+    
+    .shop {
+      background: linear-gradient(180deg, #7c7fb8, #9896d4);
+      position: relative;
+      border-bottom: 3px solid var(--accent-primary);
+    }
+    
+    .light-mode .shop {
+      background: linear-gradient(180deg, #d4d2f5, #e8e6ff);
+      border-bottom-color: var(--accent-primary);
+    }
+    
+    .shop-roof {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 20px;
+      background: linear-gradient(180deg, #5a5c8f, #7c7fb8);
+    }
+    
+    .light-mode .shop-roof {
+      background: linear-gradient(180deg, #b5b3e0, #d4d2f5);
+    }
+    
+    .shop-door {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 60px;
+      background: linear-gradient(180deg, #89c4f4, #6eb5e8);
+      border-radius: 4px 4px 0 0;
+      border: 2px solid #a8d5f7;
+    }
+    
+    .shop-door::after {
+      content: '';
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      background: #ffd88d;
+      border-radius: 50%;
+    }
+    
+    .shop-window {
+      position: absolute;
+      top: 35px;
+      width: 35px;
+      height: 35px;
+      background: rgba(137, 196, 244, 0.4);
+      border: 2px solid #89c4f4;
+      border-radius: 4px;
+    }
+    
+    .shop-window.left { left: 15px; }
+    .shop-window.right { right: 15px; }
+    
+    .shop-sign {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: #ffd88d;
+      white-space: nowrap;
+    }
+    
+    .light-mode .shop-sign {
+      color: #2d3250;
+    }
+    
+    .sidewalk {
+      background: linear-gradient(180deg, #9ca3af, #b5bac4);
+      height: 25px;
+      position: relative;
+    }
+    
+    .light-mode .sidewalk {
+      background: linear-gradient(180deg, #d1d5db, #e5e7eb);
+    }
+    
+    .sidewalk::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(255,255,255,0.2) 20px, rgba(255,255,255,0.2) 22px);
+    }
+    
+    .street {
+      background: #6b7280;
+      position: relative;
+    }
+    
+    .light-mode .street {
+      background: #9ca3af;
+    }
+    
+    .street-lines {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 4px;
+      transform: translateY(-50%);
+      background: repeating-linear-gradient(90deg, #ffd88d 0, #ffd88d 30px, transparent 30px, transparent 50px);
+    }
+    
+    /* Ball Styles */
+    .ball {
+      width: 24px;
+      height: 24px;
+      background: radial-gradient(circle at 30% 30%, #ff9ad5, #ff6eb4, #ff4a9f);
+      border-radius: 50%;
+      position: absolute;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(255,255,255,0.3);
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+    
+    .ball.animating {
+      transition: none;
+    }
+    
+    /* Ball Positions */
+    .ball-pos-roof { top: 5px; left: 50%; transform: translateX(-50%); }
+    .ball-pos-in-shop { top: 50px; left: 50%; transform: translateX(-50%); opacity: 0.5; }
+    .ball-pos-front-door { bottom: 35px; left: 50%; transform: translateX(-50%); }
+    .ball-pos-behind-shop { top: 50%; left: 20px; transform: translateY(-50%); opacity: 0.4; }
+    .ball-pos-beside-door-left { bottom: 10px; left: calc(50% - 35px); }
+    .ball-pos-beside-door-right { bottom: 10px; left: calc(50% + 20px); }
+    .ball-pos-on-sidewalk { top: 5px; left: 30%; }
+    .ball-pos-under-street { bottom: 10px; left: 50%; transform: translateX(-50%); }
+    .ball-pos-corner-left { top: 30px; left: 10px; }
+    .ball-pos-corner-right { top: 30px; right: 10px; }
+    
+    /* Ball Animations */
+    @keyframes moveInto {
+      0% { bottom: 20px; left: 50%; transform: translateX(-50%); opacity: 1; }
+      50% { bottom: 60px; left: 50%; transform: translateX(-50%); opacity: 1; }
+      100% { bottom: 100px; left: 50%; transform: translateX(-50%); opacity: 0; }
+    }
+    
+    @keyframes moveOutOf {
+      0% { bottom: 100px; left: 50%; transform: translateX(-50%); opacity: 0; }
+      50% { bottom: 60px; left: 50%; transform: translateX(-50%); opacity: 1; }
+      100% { bottom: 20px; left: 50%; transform: translateX(-50%); opacity: 1; }
+    }
+    
+    @keyframes moveThrough {
+      0% { top: 50px; left: -10px; }
+      50% { top: 50px; left: 50%; transform: translateX(-50%); }
+      100% { top: 50px; right: -10px; left: auto; }
+    }
+    
+    @keyframes moveAcross {
+      0% { bottom: 25px; left: 0; }
+      100% { bottom: 25px; left: calc(100% - 24px); }
+    }
+    
+    @keyframes movePast {
+      0% { top: 60px; left: -30px; }
+      100% { top: 60px; left: calc(100% + 30px); }
+    }
+    
+    @keyframes moveAlong {
+      0% { top: 8px; left: 10px; }
+      100% { top: 8px; left: calc(100% - 34px); }
+    }
+    
+    @keyframes moveTowards {
+      0% { bottom: 25px; left: 10px; }
+      100% { bottom: 80px; left: 50%; transform: translateX(-50%); }
+    }
+    
+    @keyframes moveAway {
+      0% { bottom: 80px; left: 50%; transform: translateX(-50%); }
+      100% { bottom: 25px; left: calc(100% - 34px); }
+    }
+    
+    @keyframes moveUp {
+      0% { bottom: 20px; left: 50%; transform: translateX(-50%); }
+      100% { top: 10px; left: 50%; transform: translateX(-50%); }
+    }
+    
+    @keyframes moveDown {
+      0% { top: 10px; left: 50%; transform: translateX(-50%); }
+      100% { bottom: 20px; left: 50%; transform: translateX(-50%); }
+    }
+    
+    @keyframes moveAround {
+      0% { top: 50%; left: 10px; transform: translateY(-50%); }
+      25% { top: 10px; left: 50%; transform: translateX(-50%); }
+      50% { top: 50%; right: 10px; left: auto; transform: translateY(-50%); }
+      75% { bottom: 10px; left: 50%; top: auto; transform: translateX(-50%); }
+      100% { top: 50%; left: 10px; transform: translateY(-50%); }
+    }
+    
+    .ball.anim-into { animation: moveInto 1.2s ease-in-out forwards; }
+    .ball.anim-out-of { animation: moveOutOf 1.2s ease-in-out forwards; }
+    .ball.anim-through { animation: moveThrough 1.2s ease-in-out forwards; }
+    .ball.anim-across { animation: moveAcross 1.2s ease-in-out forwards; }
+    .ball.anim-past { animation: movePast 1.2s linear forwards; }
+    .ball.anim-along { animation: moveAlong 1.2s ease-in-out forwards; }
+    .ball.anim-towards { animation: moveTowards 1.2s ease-out forwards; }
+    .ball.anim-away { animation: moveAway 1.2s ease-in forwards; }
+    .ball.anim-up { animation: moveUp 1.2s ease-out forwards; }
+    .ball.anim-down { animation: moveDown 1.2s ease-in forwards; }
+    .ball.anim-around { animation: moveAround 2s ease-in-out forwards; }
+    
+    /* Quiz Styles */
+    .quiz-option {
+      padding: 14px 18px;
+      border: 2px solid var(--border-subtle);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: var(--bg-card);
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-primary);
+    }
+    
+    .quiz-option:hover {
+      border-color: var(--accent-primary);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .quiz-option.selected {
+      border-color: var(--accent-primary);
+      background: rgba(168, 181, 255, 0.15);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .quiz-option.correct {
+      border-color: #86efac;
+      background: rgba(134, 239, 172, 0.15);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      color: #166534;
+    }
+    
+    .light-mode .quiz-option.correct {
+      color: #166534;
+    }
+    
+    .quiz-option.incorrect {
+      border-color: #fca5a5;
+      background: rgba(252, 165, 165, 0.15);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      color: #991b1b;
+    }
+    
+    .light-mode .quiz-option.incorrect {
+      color: #991b1b;
+    }
+    
+    /* Drawer Navigation */
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      height: 100%;
+      background: var(--bg-secondary);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-left: 1px solid var(--border-subtle);
+      box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+    }
+    
+    .drawer.open {
+      right: 0;
+    }
+    
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    
+    .drawer-overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    /* Toggle Switch */
+    .toggle-switch {
+      width: 60px;
+      height: 30px;
+      background: var(--surface-elevated);
+      border-radius: 15px;
+      position: relative;
+      cursor: pointer;
+      border: 2px solid var(--border-subtle);
+    }
+    
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .light-mode .toggle-switch::after {
+      transform: translateX(30px);
+    }
+    
+    /* Certificate Modal */
+    .certificate-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      overflow-y: auto;
+    }
+    
+    .certificate-modal.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .certificate-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      max-height: 90vh;
+      width: 100%;
+      max-width: 650px;
+    }
+    
+    .certificate {
+      background: white;
+      border: 12px solid #8b5cf6;
+      border-radius: 4px;
+      padding: 40px 35px;
+      width: 100%;
+      max-width: 650px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    
+    .certificate::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 2px solid #a78bfa;
+      pointer-events: none;
+    }
+    
+    .certificate-seal {
+      width: 70px;
+      height: 70px;
+      background: #8b5cf6;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.6), 0 0 40px rgba(139, 92, 246, 0.4), 0 4px 20px rgba(0, 0, 0, 0.2);
+      border: 3px solid white;
+    }
+    
+    .rators-logo {
+      width: 100px;
+      height: auto;
+      margin: 0 auto 15px;
+      filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.5)) drop-shadow(0 0 24px rgba(139, 92, 246, 0.3));
+    }
+    
+    .certificate-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+    
+    .certificate-subtitle {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+    
+    .certificate-body {
+      font-size: 14px;
+      color: #475569;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+    
+    .certificate-name-input {
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      font-size: 26px;
+      font-weight: 600;
+      font-family: 'Playfair Display', serif;
+      border: none;
+      border-bottom: 3px solid #8b5cf6;
+      background: transparent;
+      color: #1e293b;
+      padding: 8px 15px;
+      margin: 15px auto;
+      display: block;
+    }
+    
+    .certificate-name-input:focus {
+      outline: none;
+      border-bottom-color: #7c3aed;
+    }
+    
+    .certificate-course {
+      font-size: 22px;
+      font-weight: 700;
+      color: #7c3aed;
+      font-family: 'Playfair Display', serif;
+      margin: 20px 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .certificate-footer {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 2px solid #e2e8f0;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+    }
+    
+    .certificate-signature {
+      flex: 1;
+    }
+    
+    .signature-line {
+      border-top: 2px solid #1e293b;
+      width: 160px;
+      margin: 0 auto 6px;
+    }
+    
+    .signature-name {
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 14px;
+    }
+    
+    .signature-title {
+      font-size: 11px;
+      color: #64748b;
+      font-style: italic;
+    }
+    
+    .certificate-date {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 20px;
+    }
+    
+    .certificate-actions {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      padding: 0 20px;
+    }
+    
+    .cert-btn {
+      background: #8b5cf6;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .cert-btn:hover {
+      background: #7c3aed;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+    }
+    
+    .cert-btn-secondary {
+      background: white;
+      color: #1e293b;
+      border: 2px solid #8b5cf6;
+    }
+    
+    .cert-btn-secondary:hover {
+      background: #f8f7ff;
+      transform: translateY(-2px);
+    }
+    
+    /* WhatsApp Button */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+    
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Timer */
+    .timer {
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--accent-primary);
+    }
+    
+    .timer.warning {
+      color: #fca5a5;
+      animation: pulse 1s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    /* Practice Flash Styles */
+    .practice-sentence {
+      font-size: 1.25rem;
+      line-height: 2;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .practice-blank {
+      display: inline-block;
+      min-width: 100px;
+      border-bottom: 2px dashed var(--accent-primary);
+      margin: 0 8px;
+      padding: 4px 12px;
+      color: var(--accent-primary);
+      font-weight: 600;
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 4px;
+    }
+    
+    /* Print Styles */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      
+      #certificate-content, #certificate-content * {
+        visibility: visible;
+      }
+      
+      #certificate-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+      
+      .certificate {
+        box-shadow: none;
+        page-break-after: avoid;
+      }
+      
+      #certificate-content button {
+        display: none !important;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full overflow-auto body-text" style="background-color: var(--bg-primary); color: var(--text-primary);">
+  <div id="app" class="w-full min-h-full"><!-- Drawer Overlay -->
+   <div id="drawer-overlay" class="drawer-overlay" onclick="toggleDrawer()"></div><!-- Drawer Navigation -->
+   <div id="drawer" class="drawer">
+    <div class="p-6">
+     <div class="flex justify-between items-center mb-8">
+      <h2 class="text-xl font-bold section-title" style="color: var(--accent-primary);">Menú</h2><button onclick="toggleDrawer()" class="text-2xl" style="color: var(--text-secondary);">✕</button>
+     </div><!-- Theme Toggle -->
+     <div class="mb-8">
+      <p class="text-sm mb-3" style="color: var(--text-secondary);">Modo de Tema</p>
+      <div class="flex items-center gap-4"><span class="text-xl">🌙</span>
+       <div id="theme-toggle" class="toggle-switch" onclick="toggleTheme()"></div><span class="text-xl">☀️</span>
+      </div>
+     </div><!-- Navigation Links -->
+     <nav class="space-y-2"><button onclick="switchTab('home'); toggleDrawer();" class="w-full text-left p-4 rounded-lg elegant-card hover:shadow-lg transition-all flex items-center gap-3" style="color: var(--text-primary); background: var(--surface-elevated);"> <span class="text-xl">🏠</span> <span class="font-medium">Inicio del Lab</span> </button> <button onclick="switchTab('place'); toggleDrawer();" class="w-full text-left p-4 rounded-lg elegant-card hover:shadow-lg transition-all flex items-center gap-3" style="color: var(--text-primary); background: var(--surface-elevated);"> <span class="text-xl">📍</span> <span class="font-medium">Lab de Lugar</span> </button> <button onclick="switchTab('movement'); toggleDrawer();" class="w-full text-left p-4 rounded-lg elegant-card hover:shadow-lg transition-all flex items-center gap-3" style="color: var(--text-primary); background: var(--surface-elevated);"> <span class="text-xl">🚀</span> <span class="font-medium">Lab de Movimiento</span> </button> <button onclick="switchTab('practice'); toggleDrawer();" class="w-full text-left p-4 rounded-lg elegant-card hover:shadow-lg transition-all flex items-center gap-3" style="color: var(--text-primary); background: var(--surface-elevated);"> <span class="text-xl">⚡</span> <span class="font-medium">Práctica Flash</span> </button> <button onclick="switchTab('exam'); toggleDrawer();" class="w-full text-left p-4 rounded-lg elegant-card hover:shadow-lg transition-all flex items-center gap-3" style="color: var(--text-primary); background: var(--surface-elevated);"> <span class="text-xl">  </span> <span class="font-medium">Certificación</span> </button>
+     </nav>
+    </div>
+   </div><!-- Header -->
+   <header class="elegant-card sticky top-0 z-50" style="border-radius: 0;">
+    <div class="max-w-6xl mx-auto px-4 py-5 flex justify-between items-center">
+     <div class="flex items-center gap-3"><!-- Lab Icon -->
+      <div class="w-12 h-12 rounded-xl accent-gradient flex items-center justify-center" style="box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);"><span class="text-2xl">🔬</span>
+      </div>
+      <div>
+       <h1 id="app-title" class="text-xl md:text-2xl font-bold section-title">PREPOSITIONS LAB</h1>
+       <p class="text-xs" style="color: var(--text-secondary);">Master Spatial Language</p>
+      </div>
+     </div><button onclick="toggleDrawer()" class="p-2 rounded-lg elegant-card hover:shadow-lg transition-all">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg></button>
+    </div>
+   </header><!-- Main Content -->
+   <main class="max-w-6xl mx-auto px-4 py-8"><!-- HOME TAB -->
+    <section id="tab-home" class="tab-content">
+     <div class="text-center mb-12">
+      <h2 id="welcome-title" class="text-4xl md:text-5xl font-bold mb-4 section-title" style="color: var(--accent-primary);">Bienvenido al Laboratorio</h2>
+      <p class="text-lg" style="color: var(--text-secondary);">Comprende las relaciones espaciales a través del aprendizaje interactivo</p>
+     </div><!-- Lab Objectives -->
+     <div class="elegant-card rounded-2xl p-8 mb-8">
+      <h3 class="text-2xl font-bold mb-6 section-title" style="color: var(--accent-primary);">🎯 Objetivos del Laboratorio</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+       <div class="p-5 rounded-xl" style="background: var(--surface-elevated); border-left: 4px solid var(--accent-primary);">
+        <h4 class="font-semibold text-lg mb-2" style="color: var(--accent-gold);">1. Distinguir Posición vs. Movimiento</h4>
+        <p class="text-sm" style="color: var(--text-secondary);">Aprende a diferenciar entre ubicaciones estáticas (dónde ESTÁN las cosas) y movimientos dinámicos (cómo se MUEVEN las cosas).</p>
+       </div>
+       <div class="p-5 rounded-xl" style="background: var(--surface-elevated); border-left: 4px solid var(--accent-secondary);">
+        <h4 class="font-semibold text-lg mb-2" style="color: var(--accent-gold);">2. Visualizar Relaciones Espaciales</h4>
+        <p class="text-sm" style="color: var(--text-secondary);">Usa simulaciones del mundo real para ver exactamente cómo funcionan las preposiciones en el espacio físico.</p>
+       </div>
+       <div class="p-5 rounded-xl" style="background: var(--surface-elevated); border-left: 4px solid var(--accent-primary);">
+        <h4 class="font-semibold text-lg mb-2" style="color: var(--accent-gold);">3. Practicar Contextualmente</h4>
+        <p class="text-sm" style="color: var(--text-secondary);">Aplica tu conocimiento a través de ejercicios interactivos con retroalimentación auditiva inmediata.</p>
+       </div>
+       <div class="p-5 rounded-xl" style="background: var(--surface-elevated); border-left: 4px solid var(--accent-secondary);">
+        <h4 class="font-semibold text-lg mb-2" style="color: var(--accent-gold);">4. Obtener Certificación</h4>
+        <p class="text-sm" style="color: var(--text-secondary);">Pon a prueba tu dominio con un examen cronometrado y obtén tu certificado al aprobar.</p>
+       </div>
+      </div>
+     </div><!-- Prepositions of PLACE -->
+     <div class="elegant-card rounded-2xl p-8 mb-8">
+      <div class="flex items-center gap-3 mb-6"><span class="text-4xl">📍</span>
+       <h3 class="text-2xl font-bold section-title" style="color: var(--accent-primary);">Preposiciones de LUGAR (PLACE)</h3>
+      </div>
+      <p class="mb-6" style="color: var(--text-secondary);">Estas preposiciones describen <strong>posiciones estáticas</strong> - dónde está ubicado algo sin ningún movimiento.</p>
+      <div class="grid md:grid-cols-2 gap-4">
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• ON (sobre/en)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>Sobre una superficie o encima de</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball is on the roof.</p>
+         </div><button onclick="speak('The ball is on the roof')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• IN (en/dentro)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>Dentro de un espacio/contenedor</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball is in the shop.</p>
+         </div><button onclick="speak('The ball is in the shop')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• AT (en/a)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>En un punto específico/esquina</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball is at the corner.</p>
+         </div><button onclick="speak('The ball is at the corner')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• UNDER (debajo/bajo)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>Debajo de algo</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball is under the street.</p>
+         </div><button onclick="speak('The ball is under the street')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• BEHIND (detrás)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>En la parte trasera de</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball is behind the shop.</p>
+         </div><button onclick="speak('The ball is behind the shop')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• BESIDE / NEXT TO (al lado)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>Al lado de</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball is beside the door.</p>
+         </div><button onclick="speak('The ball is beside the door')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• IN FRONT OF (enfrente de)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>Delante de/frente a algo</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball is in front of the door.</p>
+         </div><button onclick="speak('The ball is in front of the door')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+      </div>
+     </div><!-- Prepositions of MOVEMENT -->
+     <div class="elegant-card rounded-2xl p-8">
+      <div class="flex items-center gap-3 mb-6"><span class="text-4xl">🚀</span>
+       <h3 class="text-2xl font-bold section-title" style="color: var(--accent-secondary);">Preposiciones de MOVIMIENTO (MOVEMENT)</h3>
+      </div>
+      <p class="mb-6" style="color: var(--text-secondary);">Estas preposiciones describen <strong>acciones dinámicas</strong> - cómo algo se mueve de un lugar a otro.</p>
+      <div class="grid md:grid-cols-2 gap-4">
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• INTO (hacia adentro)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>Entrando a un espacio</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball goes into the shop.</p>
+         </div><button onclick="speak('The ball goes into the shop')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• OUT OF (fuera de)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>Saliendo desde adentro</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball comes out of the shop.</p>
+         </div><button onclick="speak('The ball comes out of the shop')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• THROUGH (a través de)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>De un lado a otro atravesando</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball goes through the window.</p>
+         </div><button onclick="speak('The ball goes through the window')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• ACROSS (a través/cruzando)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>De lado a lado sobre una superficie</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball rolls across the street.</p>
+         </div><button onclick="speak('The ball rolls across the street')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• PAST (pasando por)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>Moviéndose junto a algo sin detenerse</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball goes past the shop.</p>
+         </div><button onclick="speak('The ball goes past the shop')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• ALONG (a lo largo de)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>Siguiendo un camino/línea</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball moves along the sidewalk.</p>
+         </div><button onclick="speak('The ball moves along the sidewalk')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• TOWARDS (hacia)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>En dirección a</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball moves towards the door.</p>
+         </div><button onclick="speak('The ball moves towards the door')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• AWAY FROM (alejándose de)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>Moviéndose desde un punto de referencia</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball moves away from the door.</p>
+         </div><button onclick="speak('The ball moves away from the door')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• UP / DOWN (arriba/abajo)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>Movimiento vertical</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball goes up to the roof.</p>
+         </div><button onclick="speak('The ball goes up to the roof')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+       <div class="p-4 rounded-lg" style="background: var(--surface-elevated);">
+        <div class="flex items-start justify-between gap-2">
+         <div class="flex-1">
+          <h4 class="font-semibold mb-2" style="color: var(--accent-gold);">• AROUND (alrededor de)</h4>
+          <p class="text-sm mb-1" style="color: var(--text-secondary);"><strong>En un camino circular</strong></p>
+          <p class="text-xs italic" style="color: var(--text-secondary);">Example: The ball moves around the shop.</p>
+         </div><button onclick="speak('The ball moves around the shop')" class="text-2xl hover:scale-110 transition-transform">🔊</button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- PLACE ARENA TAB -->
+    <section id="tab-place" class="tab-content hidden">
+     <div class="text-center mb-8">
+      <h2 class="text-2xl md:text-4xl font-bold mb-2 section-title" style="color: var(--accent-primary);">📍 LAB DE LUGAR</h2>
+      <p style="color: var(--text-secondary);">Haz clic en un botón para ver la posición estática de la pelota</p>
+     </div><!-- Simulator -->
+     <div class="simulator-container mb-8" style="height: 250px;">
+      <div class="shop relative" style="height: 45%;">
+       <div class="shop-roof"></div>
+       <div class="shop-sign">
+        MY SHOP
+       </div>
+       <div class="shop-window left"></div>
+       <div class="shop-window right"></div>
+       <div class="shop-door"></div>
+       <div id="place-ball" class="ball ball-pos-front-door"></div>
+      </div>
+      <div class="sidewalk"></div>
+      <div class="street" style="height: 35%;">
+       <div class="street-lines"></div>
+      </div>
+     </div><!-- Place Buttons -->
+     <div class="grid grid-cols-2 md:grid-cols-5 gap-3"><button onclick="setPlacePosition('roof')" class="elegant-btn text-white font-semibold"> On the Roof </button> <button onclick="setPlacePosition('in-shop')" class="elegant-btn text-white font-semibold"> In the Shop </button> <button onclick="setPlacePosition('front-door')" class="elegant-btn text-white font-semibold"> In Front Of </button> <button onclick="setPlacePosition('behind-shop')" class="elegant-btn text-white font-semibold"> Behind </button> <button onclick="setPlacePosition('beside-door-left')" class="elegant-btn text-white font-semibold"> Beside (Left) </button> <button onclick="setPlacePosition('beside-door-right')" class="elegant-btn text-white font-semibold"> Beside (Right) </button> <button onclick="setPlacePosition('on-sidewalk')" class="elegant-btn text-white font-semibold"> On Sidewalk </button> <button onclick="setPlacePosition('under-street')" class="elegant-btn text-white font-semibold"> Under Street </button> <button onclick="setPlacePosition('corner-left')" class="elegant-btn text-white font-semibold"> At Corner (L) </button> <button onclick="setPlacePosition('corner-right')" class="elegant-btn text-white font-semibold"> At Corner (R) </button>
+     </div><!-- Position Description -->
+     <div id="place-description" class="elegant-card rounded-xl p-6 mt-6 text-center">
+      <p class="text-lg"><span style="color: var(--accent-primary);">The ball is</span> <strong id="place-text" style="color: var(--accent-secondary);">in front of the door</strong></p>
+     </div>
+    </section><!-- MOVEMENT ARENA TAB -->
+    <section id="tab-movement" class="tab-content hidden">
+     <div class="text-center mb-8">
+      <h2 class="text-2xl md:text-4xl font-bold mb-2 section-title" style="color: var(--accent-secondary);">🚀 LAB DE MOVIMIENTO</h2>
+      <p style="color: var(--text-secondary);">Haz clic en un botón para ver la trayectoria de la pelota</p>
+     </div><!-- Simulator -->
+     <div class="simulator-container mb-8" style="height: 250px;">
+      <div class="shop relative" style="height: 45%;">
+       <div class="shop-roof"></div>
+       <div class="shop-sign">
+        MY SHOP
+       </div>
+       <div class="shop-window left"></div>
+       <div class="shop-window right"></div>
+       <div class="shop-door"></div>
+       <div id="movement-ball" class="ball" style="bottom: 20px; left: 50%; transform: translateX(-50%);"></div>
+      </div>
+      <div class="sidewalk"></div>
+      <div class="street" style="height: 35%;">
+       <div class="street-lines"></div>
+      </div>
+     </div><!-- Movement Buttons -->
+     <div class="grid grid-cols-2 md:grid-cols-5 gap-3"><button onclick="playMovement('into')" class="elegant-btn text-white font-semibold"> Into 🚪 </button> <button onclick="playMovement('out-of')" class="elegant-btn text-white font-semibold"> Out Of 🚶 </button> <button onclick="playMovement('through')" class="elegant-btn text-white font-semibold"> Through 🪟 </button> <button onclick="playMovement('across')" class="elegant-btn text-white font-semibold"> Across 🛣️ </button> <button onclick="playMovement('past')" class="elegant-btn text-white font-semibold"> Past      ️ </button> <button onclick="playMovement('along')" class="elegant-btn text-white font-semibold"> Along 〰️ </button> <button onclick="playMovement('towards')" class="elegant-btn text-white font-semibold"> Towards 🎯 </button> <button onclick="playMovement('away')" class="elegant-btn text-white font-semibold"> Away From 🏃 </button> <button onclick="playMovement('up')" class="elegant-btn text-white font-semibold"> Up ⬆️ </button> <button onclick="playMovement('down')" class="elegant-btn text-white font-semibold"> Down ⬇️ </button>
+     </div><!-- Movement Description -->
+     <div id="movement-description" class="elegant-card rounded-xl p-6 mt-6 text-center">
+      <p class="text-lg"><span style="color: var(--accent-primary);">The ball moves</span> <strong id="movement-text" style="color: var(--accent-secondary);">— selecciona un movimiento</strong></p>
+     </div>
+    </section><!-- PRACTICE FLASH TAB -->
+    <section id="tab-practice" class="tab-content hidden">
+     <div class="text-center mb-8">
+      <h2 class="text-2xl md:text-4xl font-bold mb-2 section-title" style="color: var(--accent-primary);">⚡ PRÁCTICA FLASH</h2>
+      <p style="color: var(--text-secondary);">Completa las oraciones con la preposición correcta</p>
+     </div>
+     <div id="practice-container" class="elegant-card rounded-2xl p-6"><!-- Practice content generated by JS -->
+     </div>
+     <div class="flex flex-wrap justify-center gap-4 mt-6"><button onclick="speakPracticeSentence()" class="elegant-btn text-white font-semibold flex items-center gap-2"> 🔊 Escuchar </button> <button onclick="checkPracticeAnswer()" class="elegant-btn text-white font-semibold flex items-center gap-2"> ✅ Verificar Respuesta </button> <button onclick="nextPractice()" class="elegant-btn text-white font-semibold flex items-center gap-2"> ⏭️ Siguiente </button>
+     </div>
+     <div id="practice-progress" class="elegant-card rounded-xl p-4 mt-6 text-center">
+      <p style="color: var(--text-secondary);">Progreso: <span id="practice-score" style="color: var(--accent-primary); font-weight: 600;">0/10</span></p>
+     </div>
+    </section><!-- EXAM TAB -->
+    <section id="tab-exam" class="tab-content hidden">
+     <div class="text-center mb-8">
+      <h2 class="text-2xl md:text-4xl font-bold mb-2 section-title" style="color: var(--accent-gold);">🏆 EXAMEN DE CERTIFICACIÓN</h2>
+      <p style="color: var(--text-secondary);">¡Aprueba con 70% (11/15) en 5 minutos para obtener tu certificado!</p>
+     </div><!-- Timer and Progress -->
+     <div class="elegant-card rounded-xl p-4 mb-6 flex justify-between items-center">
+      <div>
+       <p style="color: var(--text-secondary);">Pregunta <span id="exam-current" style="font-weight: 600;">1</span>/15</p>
+      </div>
+      <div id="timer" class="timer">
+       05:00
+      </div>
+      <div>
+       <p style="color: var(--text-secondary);">Puntaje: <span id="exam-score" style="color: var(--accent-primary); font-weight: 600;">0</span></p>
+      </div>
+     </div><!-- Exam Container -->
+     <div id="exam-container" class="elegant-card rounded-2xl p-6">
+      <div id="exam-start" class="text-center py-12">
+       <div class="text-6xl mb-6">
+        📝
+       </div>
+       <h3 class="text-2xl font-bold mb-4" style="color: var(--accent-primary);">¿Listo para el Desafío?</h3>
+       <p class="mb-6" style="color: var(--text-secondary);">Tienes 5 minutos para completar 15 preguntas.<br>
+         Necesitas al menos 70% (11 correctas) para aprobar.</p><button onclick="startExam()" class="elegant-btn text-white font-bold text-lg"> 🚀 INICIAR EXAMEN </button>
+      </div>
+      <div id="exam-question" class="hidden">
+       <p id="question-text" class="text-xl mb-6" style="color: var(--text-primary);"></p>
+       <div id="question-options" class="grid gap-3"><!-- Options generated by JS -->
+       </div>
+      </div>
+      <div id="exam-result" class="hidden text-center py-12">
+       <div id="result-icon" class="text-6xl mb-4"></div>
+       <h3 id="result-title" class="text-2xl font-bold mb-4"></h3>
+       <p id="result-message" class="mb-6" style="color: var(--text-secondary);"></p><button onclick="resetExam()" class="elegant-btn text-white font-semibold"> 🔄 Intentar de Nuevo </button>
+      </div>
+     </div><!-- Navigation Buttons -->
+     <div id="exam-nav" class="hidden flex justify-between mt-6"><button onclick="prevQuestion()" id="prev-btn" class="elegant-card px-6 py-3 rounded-lg font-semibold disabled:opacity-50" style="color: var(--text-primary);" disabled> ← Anterior </button> <button onclick="nextQuestion()" id="next-btn" class="elegant-btn text-white font-semibold"> Siguiente → </button> <button onclick="submitExam()" id="submit-btn" class="hidden elegant-btn text-white font-semibold"> Enviar Examen 🎯 </button>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="elegant-card mt-12" style="background: var(--footer-bg); border-radius: 0;">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+     <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
+      <div>
+       <h4 class="font-bold mb-4" style="color: var(--accent-primary);">Rators Team</h4>
+       <p class="text-sm" style="color: var(--text-secondary);">Coaching profesional de inglés con metodologías dinámicas e interactivas.</p>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4" style="color: var(--accent-primary);">Contacto</h4>
+       <p class="text-sm mb-2" style="color: var(--text-secondary);">📍 Tepic, Nayarit, México</p>
+       <p class="text-sm" style="color: var(--text-secondary);">✉️ teacher.netza.varo@gmail.com</p>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4" style="color: var(--accent-primary);">Legal</h4>
+       <p class="text-sm" style="color: var(--text-secondary);">GNU General Public License v3.0</p>
+       <p class="text-sm mt-2" style="color: var(--text-secondary);">© 2026 Rators Team - Todos los Derechos Reservados</p>
+      </div>
+     </div>
+    </div>
+   </footer><!-- Certificate Modal -->
+   <div id="certificate-modal" class="certificate-modal">
+    <div class="certificate-wrapper">
+     <div class="certificate" id="certificate-content"><!-- Rators Club Logo -->
+      <svg class="rators-logo" viewbox="0 0 200 80" xmlns="http://www.w3.org/2000/svg"><!-- Rooster head icon --> <circle cx="40" cy="40" r="28" fill="#8b5cf6" /> <path d="M40 20 L35 15 L33 18 L40 28 Z" fill="#fbbf24" /> <circle cx="35" cy="32" r="3" fill="white" /> <circle cx="45" cy="32" r="3" fill="white" /> <path d="M30 42 Q40 48 50 42" stroke="#1e293b" stroke-width="2" fill="none" /> <path d="M40 48 L38 52 L40 50 L42 52 Z" fill="#ef4444" /> <!-- Text --> <text x="75" y="35" font-family="Playfair Display, serif" font-size="20" font-weight="700" fill="#1e293b">
+        RATORS
+       </text> <text x="75" y="52" font-family="Poppins, sans-serif" font-size="14" font-weight="500" fill="#7c3aed">
+        CLUB
+       </text>
+      </svg>
+      <h1 class="certificate-title">CERTIFICATE</h1>
+      <p class="certificate-subtitle">of Achievement</p>
+      <p class="certificate-body">This certifies that</p><input type="text" id="certificate-name" placeholder="Your Full Name" class="certificate-name-input">
+      <p class="certificate-body">has successfully completed the</p>
+      <h2 class="certificate-course">Prepositions Mastery Course</h2>
+      <p class="certificate-body">demonstrating excellence and dedication in spatial language comprehension.</p>
+      <div class="certificate-footer">
+       <div class="certificate-signature">
+        <p class="signature-name">Teacher Netza</p>
+        <p class="signature-title">English Coach</p>
+       </div>
+      </div>
+      <p class="certificate-date" id="certificate-date"></p><!-- Seal -->
+      <div class="certificate-seal">
+       <svg viewbox="0 0 24 24" style="width: 45px; height: 45px; fill: white;"><path d="M12 2C9.5 2 8 4 8 6c0 1.5.5 2.5 1 3l-2 1.5c-.5.4-.5 1.1 0 1.5L12 16l5-4c.5-.4.5-1.1 0-1.5L15 9c.5-.5 1-1.5 1-3 0-2-1.5-4-4-4zm-2 6c-.5 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.5 1-1 1zm4 0c-.5 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.5 1-1 1zm-2 10v4h4l-2-4h-2z" />
+       </svg>
+      </div>
+     </div><!-- Action buttons outside certificate -->
+     <div class="certificate-actions"><button onclick="printCertificate()" class="cert-btn"> 🖨️ Print to PDF </button> <button onclick="closeCertificate()" class="cert-btn cert-btn-secondary"> Continue Learning </button>
+     </div>
+    </div>
+   </div><!-- WhatsApp Button --> <a href="https://wa.me/523111234567?text=Hola%20Teacher%20Netza%2C%20super%C3%A9%20el%20reto%20de%20preposiciones%20del%20Rators%20Team.%20%C2%BFMe%20das%20informaci%C3%B3n%20de%20tus%20paquetes%20de%20clases%3F" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+    <svg viewbox="0 0 24 24" class="w-8 h-8" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg></a>
+  </div>
+  <script>
+    // ============ CONFIG & STATE ============
+    const defaultConfig = {
+      lab_title: 'PREPOSITIONS LAB',
+      lab_subtitle: 'Master Spatial Language'
+    };
+    
+    let config = { ...defaultConfig };
+    let isDarkMode = true;
+    let currentTab = 'home';
+    
+    // Practice State
+    const practiceExercises = [
+      { sentence: "The cat is sitting ___ the table.", answer: "on", options: ["on", "in", "at", "under"] },
+      { sentence: "She walked ___ the park to get home.", answer: "through", options: ["through", "into", "on", "at"] },
+      { sentence: "The children ran ___ the street.", answer: "across", options: ["across", "into", "along", "at"] },
+      { sentence: "He drove ___ the tunnel carefully.", answer: "through", options: ["through", "over", "across", "into"] },
+      { sentence: "The ball rolled ___ the sofa.", answer: "under", options: ["under", "on", "in", "at"] },
+      { sentence: "She jumped ___ the swimming pool.", answer: "into", options: ["into", "on", "at", "through"] },
+      { sentence: "We walked ___ the river for an hour.", answer: "along", options: ["along", "across", "through", "into"] },
+      { sentence: "The plane flew ___ the clouds.", answer: "through", options: ["through", "on", "at", "in"] },
+      { sentence: "He is standing ___ the door.", answer: "behind", options: ["behind", "into", "across", "through"] },
+      { sentence: "The bird flew ___ the window.", answer: "through", options: ["through", "on", "under", "at"] }
+    ];
+    let currentPractice = 0;
+    let practiceCorrect = 0;
+    let selectedPracticeAnswer = null;
+    
+    // Exam State
+    const examQuestions = [
+      { question: "The book is ___ the shelf.", correct: "on", options: ["on", "into", "through", "across"] },
+      { question: "She walked ___ the bridge to the other side.", correct: "across", options: ["into", "across", "along", "at"] },
+      { question: "The dog ran ___ the house when it started raining.", correct: "into", options: ["on", "at", "into", "through"] },
+      { question: "He lives ___ 25 Oak Street.", correct: "at", options: ["in", "on", "at", "into"] },
+      { question: "The train went ___ the tunnel.", correct: "through", options: ["across", "into", "through", "over"] },
+      { question: "She swam ___ the pool three times.", correct: "across", options: ["through", "into", "across", "along"] },
+      { question: "The cat is hiding ___ the bed.", correct: "under", options: ["on", "in", "under", "at"] },
+      { question: "We drove ___ the beautiful countryside.", correct: "through", options: ["on", "through", "at", "into"] },
+      { question: "The children are playing ___ the garden.", correct: "in", options: ["in", "on", "at", "into"] },
+      { question: "He walked ___ me without saying hello.", correct: "past", options: ["through", "across", "past", "into"] },
+      { question: "The ball rolled ___ the hill.", correct: "down", options: ["down", "at", "in", "through"] },
+      { question: "She jumped ___ the fence easily.", correct: "over", options: ["over", "under", "into", "across"] },
+      { question: "The bird flew ___ the tree branches.", correct: "through", options: ["on", "through", "at", "in"] },
+      { question: "They walked ___ the beach for hours.", correct: "along", options: ["along", "across", "into", "through"] },
+      { question: "The mouse ran ___ the table to escape.", correct: "under", options: ["on", "under", "at", "through"] }
+    ];
+    let examStarted = false;
+    let currentQuestion = 0;
+    let examScore = 0;
+    let examAnswers = [];
+    let timerInterval = null;
+    let timeLeft = 300;
+    
+    // ============ TEXT TO SPEECH ============
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        speechSynthesis.cancel(); // Cancel any ongoing speech
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.85;
+        utterance.pitch = 1.0;
+        speechSynthesis.speak(utterance);
+      }
+    }
+    
+    // ============ ELEMENT SDK ============
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (newConfig) => {
+          config = { ...defaultConfig, ...newConfig };
+          document.getElementById('app-title').textContent = config.lab_title || defaultConfig.lab_title;
+        },
+        mapToCapabilities: (cfg) => ({
+          recolorables: [],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ['lab_title', cfg.lab_title || defaultConfig.lab_title],
+          ['lab_subtitle', cfg.lab_subtitle || defaultConfig.lab_subtitle]
+        ])
+      });
+    }
+    
+    // ============ THEME TOGGLE ============
+    function toggleTheme() {
+      isDarkMode = !isDarkMode;
+      document.body.classList.toggle('light-mode', !isDarkMode);
+    }
+    
+    // ============ DRAWER ============
+    function toggleDrawer() {
+      const drawer = document.getElementById('drawer');
+      const overlay = document.getElementById('drawer-overlay');
+      drawer.classList.toggle('open');
+      overlay.classList.toggle('visible');
+    }
+    
+    // ============ TAB NAVIGATION ============
+    function switchTab(tab) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`tab-${tab}`).classList.remove('hidden');
+      currentTab = tab;
+      
+      if (tab === 'practice') {
+        renderPractice();
+      }
+    }
+    
+    // ============ PLACE SIMULATOR ============
+    const placeDescriptions = {
+      'roof': { text: 'on the roof', speech: 'The ball is on the roof' },
+      'in-shop': { text: 'in the shop (inside)', speech: 'The ball is in the shop' },
+      'front-door': { text: 'in front of the door', speech: 'The ball is in front of the door' },
+      'behind-shop': { text: 'behind the shop', speech: 'The ball is behind the shop' },
+      'beside-door-left': { text: 'beside the door (left)', speech: 'The ball is beside the door' },
+      'beside-door-right': { text: 'beside the door (right)', speech: 'The ball is beside the door' },
+      'on-sidewalk': { text: 'on the sidewalk', speech: 'The ball is on the sidewalk' },
+      'under-street': { text: 'under the street level', speech: 'The ball is under the street' },
+      'corner-left': { text: 'at the left corner', speech: 'The ball is at the corner' },
+      'corner-right': { text: 'at the right corner', speech: 'The ball is at the corner' }
+    };
+    
+    function setPlacePosition(position) {
+      const ball = document.getElementById('place-ball');
+      const desc = placeDescriptions[position];
+      
+      ball.className = 'ball';
+      void ball.offsetWidth;
+      ball.className = `ball ball-pos-${position}`;
+      document.getElementById('place-text').textContent = desc.text;
+      
+      // Speak the position
+      speak(desc.speech);
+    }
+    
+    // ============ MOVEMENT SIMULATOR ============
+    const movementDescriptions = {
+      'into': { text: 'INTO the shop', speech: 'The ball goes into the shop' },
+      'out-of': { text: 'OUT OF the shop', speech: 'The ball comes out of the shop' },
+      'through': { text: 'THROUGH the window', speech: 'The ball goes through the window' },
+      'across': { text: 'ACROSS the street', speech: 'The ball rolls across the street' },
+      'past': { text: 'PAST the shop', speech: 'The ball goes past the shop' },
+      'along': { text: 'ALONG the sidewalk', speech: 'The ball moves along the sidewalk' },
+      'towards': { text: 'TOWARDS the door', speech: 'The ball moves towards the door' },
+      'away': { text: 'AWAY FROM the door', speech: 'The ball moves away from the door' },
+      'up': { text: 'UP to the roof', speech: 'The ball goes up to the roof' },
+      'down': { text: 'DOWN from the roof', speech: 'The ball goes down from the roof' }
+    };
+    
+    function playMovement(movement) {
+      const ball = document.getElementById('movement-ball');
+      const desc = movementDescriptions[movement];
+      
+      ball.className = 'ball animating';
+      ball.style = '';
+      void ball.offsetWidth;
+      ball.classList.add(`anim-${movement}`);
+      document.getElementById('movement-text').textContent = desc.text;
+      
+      // Speak the movement
+      speak(desc.speech);
+    }
+    
+    // ============ PRACTICE FLASH ============
+    function renderPractice() {
+      const container = document.getElementById('practice-container');
+      const exercise = practiceExercises[currentPractice];
+      
+      const parts = exercise.sentence.split('___');
+      
+      container.innerHTML = `
+        <div class="text-center mb-6">
+          <span class="text-sm px-3 py-1 rounded-full" style="background: var(--accent-primary); color: white;">
+            Ejercicio ${currentPractice + 1}/10
+          </span>
+        </div>
+        <p class="practice-sentence text-center mb-8" style="color: var(--text-primary);">
+          ${parts[0]}<span class="practice-blank" id="practice-blank">${selectedPracticeAnswer || '___'}</span>${parts[1]}
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          ${exercise.options.map(opt => `
+            <button onclick="selectPracticeAnswer('${opt}')" 
+                    class="quiz-option ${selectedPracticeAnswer === opt ? 'selected' : ''}" 
+                    id="practice-opt-${opt}">
+              ${opt}
+            </button>
+          `).join('')}
+        </div>
+      `;
+      
+      document.getElementById('practice-score').textContent = `${practiceCorrect}/10`;
+    }
+    
+    function selectPracticeAnswer(answer) {
+      selectedPracticeAnswer = answer;
+      renderPractice();
+    }
+    
+    function checkPracticeAnswer() {
+      if (!selectedPracticeAnswer) return;
+      
+      const exercise = practiceExercises[currentPractice];
+      const isCorrect = selectedPracticeAnswer === exercise.answer;
+      
+      const optBtn = document.getElementById(`practice-opt-${selectedPracticeAnswer}`);
+      if (isCorrect) {
+        optBtn.classList.add('correct');
+        practiceCorrect++;
+        speak('Correct!');
+      } else {
+        optBtn.classList.add('incorrect');
+        document.getElementById(`practice-opt-${exercise.answer}`).classList.add('correct');
+        speak('Incorrect. The correct answer is ' + exercise.answer);
+      }
+      
+      document.getElementById('practice-score').textContent = `${practiceCorrect}/10`;
+    }
+    
+    function nextPractice() {
+      selectedPracticeAnswer = null;
+      currentPractice = (currentPractice + 1) % practiceExercises.length;
+      if (currentPractice === 0) {
+        practiceCorrect = 0;
+      }
+      renderPractice();
+    }
+    
+    function speakPracticeSentence() {
+      const exercise = practiceExercises[currentPractice];
+      const fullSentence = exercise.sentence.replace('___', exercise.answer);
+      speak(fullSentence);
+    }
+    
+    // ============ EXAM ============
+    function startExam() {
+      examStarted = true;
+      currentQuestion = 0;
+      examScore = 0;
+      examAnswers = new Array(examQuestions.length).fill(null);
+      timeLeft = 300;
+      
+      document.getElementById('exam-start').classList.add('hidden');
+      document.getElementById('exam-question').classList.remove('hidden');
+      document.getElementById('exam-nav').classList.remove('hidden');
+      
+      startTimer();
+      renderQuestion();
+    }
+    
+    function startTimer() {
+      updateTimerDisplay();
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          submitExam();
+        }
+      }, 1000);
+    }
+    
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      const timerEl = document.getElementById('timer');
+      timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      timerEl.classList.toggle('warning', timeLeft <= 60);
+    }
+    
+    function renderQuestion() {
+      const q = examQuestions[currentQuestion];
+      document.getElementById('question-text').textContent = q.question;
+      document.getElementById('exam-current').textContent = currentQuestion + 1;
+      
+      const optionsContainer = document.getElementById('question-options');
+      optionsContainer.innerHTML = q.options.map(opt => `
+        <button onclick="selectAnswer('${opt}')" 
+                class="quiz-option ${examAnswers[currentQuestion] === opt ? 'selected' : ''}">
+          ${opt}
+        </button>
+      `).join('');
+      
+      document.getElementById('prev-btn').disabled = currentQuestion === 0;
+      
+      if (currentQuestion === examQuestions.length - 1) {
+        document.getElementById('next-btn').classList.add('hidden');
+        document.getElementById('submit-btn').classList.remove('hidden');
+      } else {
+        document.getElementById('next-btn').classList.remove('hidden');
+        document.getElementById('submit-btn').classList.add('hidden');
+      }
+    }
+    
+    function selectAnswer(answer) {
+      examAnswers[currentQuestion] = answer;
+      renderQuestion();
+    }
+    
+    function prevQuestion() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        renderQuestion();
+      }
+    }
+    
+    function nextQuestion() {
+      if (currentQuestion < examQuestions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      }
+    }
+    
+    function submitExam() {
+      clearInterval(timerInterval);
+      
+      examScore = examQuestions.reduce((score, q, i) => {
+        return score + (examAnswers[i] === q.correct ? 1 : 0);
+      }, 0);
+      
+      document.getElementById('exam-score').textContent = examScore;
+      document.getElementById('exam-question').classList.add('hidden');
+      document.getElementById('exam-nav').classList.add('hidden');
+      document.getElementById('exam-result').classList.remove('hidden');
+      
+      const passed = examScore >= 11;
+      document.getElementById('result-icon').textContent = passed ? '🏆' : '😢';
+      document.getElementById('result-title').textContent = passed ? '¡FELICIDADES!' : '¡Sigue Practicando!';
+      document.getElementById('result-title').style.color = passed ? 'var(--accent-primary)' : '#fca5a5';
+      document.getElementById('result-message').innerHTML = passed 
+        ? `Obtuviste ${examScore}/15 (${Math.round(examScore * 100 / 15)}%). ¡Has ganado tu certificado!`
+        : `Obtuviste ${examScore}/15 (${Math.round(examScore * 100 / 15)}%). Necesitas 70% (11/15) para aprobar. ¡Inténtalo de nuevo!`;
+      
+      if (passed) {
+        setTimeout(showCertificate, 1000);
+      }
+    }
+    
+    function resetExam() {
+      examStarted = false;
+      currentQuestion = 0;
+      examScore = 0;
+      examAnswers = [];
+      timeLeft = 300;
+      
+      document.getElementById('exam-start').classList.remove('hidden');
+      document.getElementById('exam-question').classList.add('hidden');
+      document.getElementById('exam-result').classList.add('hidden');
+      document.getElementById('exam-nav').classList.add('hidden');
+      document.getElementById('timer').textContent = '05:00';
+      document.getElementById('timer').classList.remove('warning');
+      document.getElementById('exam-score').textContent = '0';
+    }
+    
+    // ============ CERTIFICATE ============
+    function showCertificate() {
+      const modal = document.getElementById('certificate-modal');
+      const dateEl = document.getElementById('certificate-date');
+      dateEl.textContent = new Date().toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+      modal.classList.add('visible');
+    }
+    
+    function closeCertificate() {
+      document.getElementById('certificate-modal').classList.remove('visible');
+      resetExam();
+    }
+    
+    function printCertificate() {
+      const name = document.getElementById('certificate-name').value.trim();
+      if (!name) {
+        document.getElementById('certificate-name').focus();
+        return;
+      }
+      
+      window.print();
+    }
+    
+    // ============ INIT ============
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPractice();
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c6daf616323d875',t:'MTc2OTkwOTQ0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
